@@ -1,7 +1,11 @@
 import Data.Time.Calendar
+
 data Status = Pendente | Concluida deriving (Show, Eq)
+
 data Prioridade = Baixa | Media | Alta deriving (Show, Eq, Ord)
+
 data Categoria = Trabalho | Estudos | Pessoal | Outro deriving (Show, Eq)
+
 data Tarefa = Tarefa
     { idTarefa :: Int
     , descricao :: String
