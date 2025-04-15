@@ -26,4 +26,3 @@ marcarConcluida id lista_tarefa =
       then Left (concluiTarefa id lista_tarefa)
       else Right "Erro: Lista inalterada, nao existe uma tarefa com esse id!"
 
--- que funções são essas de conclui tarefa e todosIds?
