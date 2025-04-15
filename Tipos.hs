@@ -11,3 +11,4 @@ data Tarefa = Tarefa
     , prazo :: Maybe Day
     , tags :: [String]
     } deriving (Show, Eq)
+aed = Tarefa { idTarefa = 123, descricao = "Materia", status = Pendente, prioridade = Baixa, categoria = Estudos, prazo = Nothing, tags = ["oiii"]}
