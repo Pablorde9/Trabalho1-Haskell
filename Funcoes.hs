@@ -20,10 +20,10 @@ concluiTarefa id lista_tarefa = map conclui lista_tarefa
         | idTarefa tarefa == id = tarefa {status = Concluida}
         | otherwise = tarefa
 
-
-
 marcarConcluida :: Int -> [Tarefa] -> Either [Tarefa] String
 marcarConcluida id lista_tarefa = 
     if (elem id (todosIds lista_tarefa))
       then Left (concluiTarefa id lista_tarefa)
       else Right "Erro: Lista inalterada, nao existe uma tarefa com esse id!"
+
+-- que funções são essas de conclui tarefa e todosIds?
