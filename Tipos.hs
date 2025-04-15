@@ -1,3 +1,5 @@
+module tipos where
+
 import Data.Time.Calendar
 
 data Status = Pendente | Concluida deriving (Show, Eq)
