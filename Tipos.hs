@@ -1,4 +1,4 @@
-module tipos where
+module Tipos where
 
 import Data.Time.Calendar
 
