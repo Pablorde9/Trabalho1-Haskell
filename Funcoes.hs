@@ -7,9 +7,13 @@ todosIds :: [Tarefa] -> [Int]
 todosIds lista_tarefa = map idTarefa lista_tarefa
 -- funcao auxiliar que retorna a lista de todos os ids de uma lista
 
+idPertenceLista :: Tarefa -> [Tarefa] -> Bool
+idPertenceLista tarefa lista_tarefa = (elem (idTarefa tarefa) (todosIds lista_tarefa)) 
+--checa se o id de uma tarefa ja pertence a uma lista
+
 adicionarTarefa :: Tarefa -> [Tarefa] -> Either String [Tarefa]
 adicionarTarefa tarefa lista_tarefa = 
-     if (elem (idTarefa tarefa) (todosIds lista_tarefa)) -- compara se o id da nova tarefa ja pertence a lista, usando o todosIds
+     if (idPertenceLista tarefa lista_tarefa) -- compara se o id da nova tarefa ja pertence a lista
        then Left "Error: ID ja existente" -- se o id da nova tarefa ja existir na lista, retorna mensagem de erro
        else Right (tarefa : lista_tarefa) -- coloca a nova tarefa no comeco da lista de tarefas
 
