@@ -29,3 +29,21 @@ marcarConcluida id = map (\t -> if idTarefa t == id then t { status = Concluida 
 -- adicionar uma forma de verificar se a tarefa realmente exitse 
 
 -- implementar nas funções o Either para casos de erro
+
+--FUNÇÕES AVANÇADAS
+
+listarPorCategoria :: Categoria -> [Tarefa] -> [Tarefa]
+listarPorCategoria categoria_listada = filter(\t -> categoria t == categoria_listada)
+-- lista a categoria com filter aplicada junto com a lista fornacida
+
+listarPorPrioridade :: Prioridade -> [Tarefa] -> [Tarefa]
+listarPorPrioridade prioridade_listada = filter (\t -> prioridade t == prioridade_listada)
+-- filtra por prioridade fornecida
+
+filtrarPorStatus :: Status -> [Tarefa] -> [Tarefa]
+filtrarPorStatus status_listado = filter (\t -> status t == status_listado)
+-- filtra pelo status fornecido]
+
+ordenarPorPrioridade :: [Tarefa] -> [Tarefa]
+
+buscarPorPalavraChave :: String -> [Tarefa] -> [Tarefa]
