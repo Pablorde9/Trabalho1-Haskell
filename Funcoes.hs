@@ -55,3 +55,4 @@ ordenarPorPrioridade (x:xs) = ordenarPorPrioridade maiores ++ [x] ++ ordenarPorP
 -- nao testei ainda se ta 100% certo, fica para vcs ai, possivelmente deve ter algum erro
 
 buscarPorPalavraChave :: String -> [Tarefa] -> [Tarefa]
+-- não tenho capacidade cognitiva para fazer essa
