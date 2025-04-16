@@ -1,7 +1,7 @@
 module Funcoes where
 
 import Tipos
--- os nomes das funcoes segue a estrutura pedroColla e de variaveis pedro_colla, pra nao ter confusao
+-- os nomes das funcoes segue a estrutura nomeFuncao e de variaveis nome_variavel, pra nao ter confusao
 
 todosIds :: [Tarefa] -> [Int] 
 todosIds lista_tarefa = map idTarefa lista_tarefa
