@@ -49,7 +49,9 @@ ordenarPorPrioridade [] = []
 ordenarPorPrioridade (x:xs) = ordenarPorPrioridade maiores ++ [x] ++ ordenarPorPrioridade menores
    where
       maiores = filter (\t -> prioridade t < prioridade x) (xs)
+      --retira os elementos que são menores que x e filtra no resto da lista, deixando apenas os maiores que x
       menores = filter (\t -> prioridade t >= prioridade x) (xs)
+      --retira os maiores e iguais a x e filtra no restoda lista, deixando apenas os menores que x 
 -- nao testei ainda se ta 100% certo, fica para vcs ai, possivelmente deve ter algum erro
 
 buscarPorPalavraChave :: String -> [Tarefa] -> [Tarefa]
