@@ -45,5 +45,11 @@ filtrarPorStatus status_listado = filter (\t -> status t == status_listado)
 -- filtra pelo status fornecido]
 
 ordenarPorPrioridade :: [Tarefa] -> [Tarefa]
+ordenarPorPrioridade [] = []
+ordenarPorPrioridade (x:xs) = ordenarPorPrioridade maiores ++ [x] ++ ordenarPorPrioridade menores
+   where
+      maiores = filter (\t -> prioridade t < prioridade x) (xs)
+      menores = filter (\t -> prioridade t >= prioridade x) (xs)
+-- nao testei ainda se ta 100% certo, fica para vcs ai, possivelmente deve ter algum erro
 
 buscarPorPalavraChave :: String -> [Tarefa] -> [Tarefa]
