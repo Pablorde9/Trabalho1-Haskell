@@ -2,7 +2,7 @@ module Funcoes where
 
 import Tipos
 -- os nomes das funcoes segue a estrutura nomeFuncao e de variaveis nome_variavel, pra nao ter confusao
-
+-- nao pode mudar a assinatura das funcoes, vamos ter que fazer de outro jeito
 todosIds :: [Tarefa] -> [Int] 
 todosIds lista_tarefa = map idTarefa lista_tarefa
 -- funcao auxiliar que retorna a lista de todos os ids de uma lista
