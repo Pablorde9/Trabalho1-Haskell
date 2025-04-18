@@ -55,4 +55,18 @@ ordenarPorPrioridade (x:xs) = ordenarPorPrioridade maiores ++ [x] ++ ordenarPorP
 -- nao testei ainda se ta 100% certo
 
 buscarPorPalavraChave :: String -> [Tarefa] -> [Tarefa]
--- ainda não tenho capacidade cognitiva para fazer essa
+buscarPorPalavraChave palavra listaTarefas = filter (\t -> contem palavra (descricao t)) listaTarefas
+--filtra a lista com base na palavra procurada
+  where
+    contem _ [] = False
+    contem [] _ = True
+    contem p s = corresponde p s || contem p (avançar s)
+    --verifica se contem a palavra, chamado a funcao corresponde para verificar 
+    corresponde [] _ = True
+    corresponde _ [] = False
+    corresponde (p:ps) (s:ss) = p == s && corresponde ps ss
+    --verifica se o elemento contido corresponde a palavra procurada na lista
+    avancar (_:xs) = xs
+    avancar [] = []
+    --avança em um elemento da lista 
+
