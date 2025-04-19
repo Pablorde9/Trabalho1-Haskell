@@ -7,7 +7,7 @@ Gabriel Valentin, Pablo Rodrigues, Pedro de Colla, Ruan Pablo
 - [X] funcoes basicas *
 - [X] funcoes avancadas
 - [ ] gestao de prazos
-- [ ] sistema de tags
+- [X] sistema de tags
 - [ ] persistencia de dados
 - [ ] validacao
 - [ ] interface simples via terminal
