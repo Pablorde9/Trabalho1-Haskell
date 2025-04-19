@@ -114,3 +114,34 @@ filtrarPorTag tag_alvo lista_tarefa = filter (\t -> contem tag_alvo (tags t)) li
   contem _ [] = False -- se a lista de tags da tarefa esta vazia, entao e falso
   contem [] _ = True -- se a tag desejada e vazia, entao retorna todas as tarefas
   contem tag_alvo (x:xs) = if x == tag_alvo then True else contem tag_alvo xs -- se a a tag e igual retorna True, senao testa a proxima tag
+
+
+-- funcao que recebe uma tag alvo e uma lista de tags, retorna uma nova lista de tags sem nenhuma instancia da tag alvo 
+excluiTagsRepetidas :: String -> [String] -> [String]
+excluiTagsRepetidas tag_alvo lista_tags = (filter (\t -> t /= tag_alvo) lista_tags) -- filter que retorna true quando a tag da lista e diferente da tag alvo
+
+
+-- recebe uma lista de tags e remove todas as tags repetidas, retorna uma lista com apenas uma instancia de cada tag da lista original 
+listaDeTagsExclusivas :: [String] -> [String]
+listaDeTagsExclusivas [] = [] -- caso base
+listaDeTagsExclusivas (x:xs) = [x] ++ listaDeTagsExclusivas (excluiTagsRepetidas x xs) -- retorna a tag a ser analisada ++ a lista sem nenhuma instancia dela
+
+
+-- recebe uma tag alvo e uma lista de tags, retorna quantas vezes a tag alvo aparece ao longo da lista
+contagemTagsIguais :: String -> [String] -> Int
+contagemTagsIguais [] _ = 0 -- caso a tag alvo seja vazia, nao tem correspondencia
+contagemTagsIguais _ [] = 1 -- quando a lista fica sem elementos retorna 1, que se refere a instancia original do elemento na lista
+contagemTagsIguais tag_alvo (x:xs) = if tag_alvo == x then 1 + contagemTagsIguais tag_alvo xs else contagemTagsIguais tag_alvo xs  -- acha de forma recursiva se o elemento se repete
+
+
+-- funcao que recebe uma lista de tarefas e retorna uma lista com as tags presentes e sua frequencia de suso
+nuvemDeTags :: [Tarefa] -> [(String, Int)]
+nuvemDeTags lista_tarefas =  zip (listaDeTagsExclusivas (listaDeTags lista_tarefas)) (contagemDeTags (listaDeTags lista_tarefas)) -- faz o zip entre a lista de tarefas unicas e a quantidade de vezes que as tarefas aparecem 
+  where
+  -- retorna a lista total de tags da lista de tarefas(inclui repetidas) de forma recursiva
+  listaDeTags [] = [] -- caso base
+  listaDeTags (x:xs) = tags x ++ listaDeTags xs -- concatena todas as tags de todas as tarefas
+
+  -- conta quantas vezes uma tag aparece na lista de forma recursiva
+  contagemDeTags [] = [] -- caso base
+  contagemDeTags (x:xs) = [contagemTagsIguais x xs] ++ contagemDeTags (excluiTagsRepetidas x xs) -- gera uma lista de inteiros com a quantidade de vezes que cada tag aparece  
