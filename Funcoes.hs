@@ -105,9 +105,12 @@ verificarAtrasos (t:ts) dataAtual
 
 -- Funcoes de Sistema de Tags:
 
+
+-- funcao que recebe uma tag alvo e uma lista de tarefas e retorna uma lista com todas as tarefas que possuem tal tag
 filtrarPorTag :: String -> [Tarefa] -> [Tarefa]
-filtrarPorTag tag_alvo lista_tarefa = filter (\t -> contem tag_alvo (tags t)) lista_tarefa
+filtrarPorTag tag_alvo lista_tarefa = filter (\t -> contem tag_alvo (tags t)) lista_tarefa -- filter aplicado sobre a lista e com a funcao auxiliar "contem"
   where
-  contem _ [] = False
-  contem [] _ = True
-  contem tag_alvo (x:xs) = if x == tag_alvo then True else contem tag_alvo xs
+  -- funcao auxiliar recursiva que checa se a tag dada e igual a alguma das tags da tarefa
+  contem _ [] = False -- se a lista de tags da tarefa esta vazia, entao e falso
+  contem [] _ = True -- se a tag desejada e vazia, entao retorna todas as tarefas
+  contem tag_alvo (x:xs) = if x == tag_alvo then True else contem tag_alvo xs -- se a a tag e igual retorna True, senao testa a proxima tag
