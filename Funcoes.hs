@@ -3,22 +3,26 @@ module Funcoes where
 import Tipos
 -- os nomes das funcoes segue a estrutura nomeFuncao e de variaveis nome_variavel, pra nao ter confusao
 -- nao pode mudar a assinatura das funcoes, vamos ter que fazer de outro jeito
+
+-- FUNCOES BASICAS:
+
 todosIds :: [Tarefa] -> [Int] 
 todosIds lista_tarefa = map idTarefa lista_tarefa
 -- funcao auxiliar que retorna a lista de todos os ids de uma lista
+
 
 idPertenceLista :: Tarefa -> [Tarefa] -> Bool
 idPertenceLista tarefa lista_tarefa = (elem (idTarefa tarefa) (todosIds lista_tarefa)) 
 --checa se o id de uma tarefa ja pertence a uma lista
 
-adicionarTarefa :: Tarefa -> [Tarefa] -> Either String [Tarefa]
+adicionarTarefa :: Tarefa -> [Tarefa] -> [Tarefa]
 adicionarTarefa tarefa lista_tarefa = 
      if (idPertenceLista tarefa lista_tarefa) -- compara se o id da nova tarefa ja pertence a lista
-       then Left "Error: ID ja existente" -- se o id da nova tarefa ja existir na lista, retorna mensagem de erro
-       else Right (tarefa : lista_tarefa) -- coloca a nova tarefa no comeco da lista de tarefas
+       then lista_tarefa -- se o id da nova tarefa ja existir na lista, retorna mensagem de erro
+       else (tarefa : lista_tarefa) -- coloca a nova tarefa no comeco da lista de tarefas
 
 removerTarefa :: Int -> [Tarefa] -> [Tarefa]
-removerTarefa id = filter (\t -> idTarefa t /= id) 
+removerTarefa id lista_tarefa = filter (\t -> idTarefa t /= id) lista_tarefa 
  -- verifica se existe algum id(t) que seja igual ao id fornecido, e o remove
  -- adicionar um indicador para se a tarefa foi encontrada ou removida
 
@@ -60,7 +64,7 @@ buscarPorPalavraChave palavra listaTarefas = filter (\t -> contem palavra (descr
   where
     contem _ [] = False
     contem [] _ = True
-    contem p s = corresponde p s || contem p (avançar s)
+    contem p s = corresponde p s || contem p (avancar s)
     --verifica se contem a palavra, chamado a funcao corresponde para verificar 
     corresponde [] _ = True
     corresponde _ [] = False
