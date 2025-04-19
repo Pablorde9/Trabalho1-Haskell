@@ -5,7 +5,7 @@ Gabriel Valentin, Pablo Rodrigues, Pedro de Colla, Ruan Pablo
 
 - [X] Definicao dos Tipos Algebricos
 - [X] funcoes basicas *
-- [ ] funcoes avancadas
+- [X] funcoes avancadas
 - [ ] gestao de prazos
 - [ ] sistema de tags
 - [ ] persistencia de dados
