@@ -89,3 +89,13 @@ buscarPorPalavraChave palavra listaTarefas = filter (\t -> contem palavra (descr
      --avança em um elemento da lista
     avancar (_:xs) = xs
     avancar [] = []
+
+--verifica se uma tarefa esta em atraso de forma recursiva, devolvendo apenas tais tarefas
+verificarAtrasos :: [Tarefa] -> Day -> [Tarefa]
+verificarAtrasos [] _ = []
+verificarAtrasos (t:ts) dataAtual
+--p recebe o valor prazo da tarfea t e compara com a data fornecida, e comprara se t tambem está pendente
+  | Just p <- prazo t, p < dataAtual, status t == Pendente = t : verificarAtrasos ts dataAtual
+--caso nao esteja em atraso a lista continua a checar o resto dela, tarefas sem prazo nunca são consideradas em atraso
+  | otherwise = verificarAtrasos ts dataAtual
+
