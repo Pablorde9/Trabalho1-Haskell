@@ -1,7 +1,7 @@
 module Funcoes where
 
 import Tipos
-
+import Data.Time.Calendar
 
 -- *os nomes das funcoes segue a estrutura nomeFuncao e de variaveis nome_variavel, pra nao ter confusao*
 -- TODO: implementar nas funções o Either para casos de erro
@@ -73,7 +73,7 @@ ordenarPorPrioridade (x:xs) = ordenarPorPrioridade maiores ++ [x] ++ ordenarPorP
 
 --filtra a lista com base na palavra procurada
 buscarPorPalavraChave :: String -> [Tarefa] -> [Tarefa]
-buscarPorPalavraChave palavra listaTarefas = filter (\t -> contem palavra (descricao t)) listaTarefas
+buscarPorPalavraChave palavra lista_tarefas = filter (\t -> contem palavra (descricao t)) lista_tarefas
   where
     --verifica se contem a palavra, chamado a funcao corresponde para verificar
     contem _ [] = False
@@ -90,6 +90,9 @@ buscarPorPalavraChave palavra listaTarefas = filter (\t -> contem palavra (descr
     avancar (_:xs) = xs
     avancar [] = []
 
+-- Funcoes de Gestao de prazos:
+
+
 --verifica se uma tarefa esta em atraso de forma recursiva, devolvendo apenas tais tarefas
 verificarAtrasos :: [Tarefa] -> Day -> [Tarefa]
 verificarAtrasos [] _ = []
@@ -99,3 +102,12 @@ verificarAtrasos (t:ts) dataAtual
 --caso nao esteja em atraso a lista continua a checar o resto dela, tarefas sem prazo nunca são consideradas em atraso
   | otherwise = verificarAtrasos ts dataAtual
 
+
+-- Funcoes de Sistema de Tags:
+
+filtrarPorTag :: String -> [Tarefa] -> [Tarefa]
+filtrarPorTag tag_alvo lista_tarefa = filter (\t -> contem tag_alvo (tags t)) lista_tarefa
+  where
+  contem _ [] = False
+  contem [] _ = True
+  contem tag_alvo (x:xs) = if x == tag_alvo then True else contem tag_alvo xs
