@@ -4,7 +4,7 @@ Gabriel Valentin, Pablo Rodrigues, Pedro de Colla, Ruan Pablo
 ## Roadmap 
 
 - [X] Definicao dos Tipos Algebricos
-- [ ] funcoes basicas *
+- [X] funcoes basicas *
 - [ ] funcoes avancadas
 - [ ] gestao de prazos
 - [ ] sistema de tags
