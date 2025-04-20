@@ -103,6 +103,20 @@ verificarAtrasos (t:ts) dataAtual
 --caso nao esteja em atraso a lista continua a checar o resto dela, tarefas sem prazo nunca são consideradas em atraso
   | otherwise = verificarAtrasos ts dataAtual
 
+--faz o calculo dos dias restantes para todas as tarefas que tenham prazo
+calcularDiasRestantes :: Tarefa -> Data -> Maybe Int
+calcularDiasRestantes tarefa dataAtual =
+  case prazo tarefa of
+    Nothing -> Nothing --tarefa sem prazo definido
+    Just p -> Just (diferencaDias p dataAtual) --calcula dias restantes
+
+-- Função auxiliar para calcular diferença entre datas
+diferencaDias :: Data -> Data -> Int
+diferencaDias (Data a1 m1 d1) (Data a2 m2 d2) =
+  (a1 - a2) * 360 + (m1 - m2) * 30 + (d1 - d2) --aproximação de mês para 30 dias
+
+
+
 
 -- Funcoes de Sistema de Tags:
 
