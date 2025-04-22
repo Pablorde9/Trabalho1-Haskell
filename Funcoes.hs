@@ -161,6 +161,31 @@ nuvemDeTags lista_tarefas =  zip (listaDeTagsExclusivas (listaDeTags lista_taref
   contagemDeTags [] = [] -- caso base
   contagemDeTags (x:xs) = [contagemTagsIguais x xs] ++ contagemDeTags (excluiTagsRepetidas x xs) -- gera uma lista de inteiros com a quantidade de vezes que cada tag aparece  
 
+--funcao auxiliar para calcular a porcentagem de tarefas com determinado tipo
+porcentagemTarefa :: [Tarefa] -> Int -> Double
+porcentagemTarefa lista_tarefa qtdx = 100 * fromIntegral qtdx / fromIntegral (qtdTarefas lista_tarefa)
+
+-- **ainda falta um pouco de testes - se printa bonitinho no main
+-- funcao que retorna um resumo das tarefas dentro da lista
+relatorioTarefa :: [Tarefa] -> String
+relatorioTarefa lista_tarefa =
+    let total = qtdTarefas lista_tarefa
+        pendente = length (filter ((==Pendente) . status) lista_tarefa)
+        concluida = length (filter ((==Concluida) . status) lista_tarefa)
+        qtdTrab = length (filter ((==Trabalho) . categoria) lista_tarefa)
+        qtdEst = length (filter ((==Estudos) . categoria) lista_tarefa)
+        qtdPes = length (filter ((==Pessoal) . categoria) lista_tarefa)
+        qtdOut = length (filter ((==Outro) . categoria) lista_tarefa)
+    in unlines -- unlines junta strings e adicionar o \n
+       [ "Relatorio Resumido:"
+       , "- Total de tarefas: " ++ show total
+       , "- Pendentes: " ++ show pendente ++ " | Concluidas: " ++ show concluida
+       , "- Distribuicao por categoria:"
+       , "* Trabalho: " ++ show qtdTrab ++ " tarefas (" ++ show (porcentagemTarefa lista_tarefa qtdTrab) ++ "%)"
+       , "* Estudos: " ++ show qtdEst ++ " tarefas (" ++ show (porcentagemTarefa lista_tarefa qtdEst) ++ "%)"
+       , "* Pessoal: " ++ show qtdPes ++ " tarefas (" ++ show (porcentagemTarefa lista_tarefa qtdPes) ++ "%)"
+       , "* Outro: " ++ show qtdOut ++ " tarefas (" ++ show (porcentagemTarefa lista_tarefa qtdOut) ++ "%)"
+       ]
 
 -- Funcoes de Peristencia dos Dados:
 
