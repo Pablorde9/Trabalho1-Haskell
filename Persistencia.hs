@@ -1,16 +1,19 @@
 module Persistencia where
 
+import Data.Time.Calendar
 import Tipos
 import System.IO
 import Data.List
+import Data.Char (isDigit)
 
 tarefaParaString :: Tarefa -> String
-tarefaParaString tarefa = unwords [ show (idTarefa tarefa)
-                           , descricao tarefa
-                           , show (status tarefa)
-                           , show (categoria tarefa)
-                           , maybe "Nothing" show (prazo tarefa)
-                           , unwords (tags tarefa)
+tarefaParaString tarefa = unwords [show (idTarefa tarefa)
+                           , "/ " ++ descricao tarefa
+                           , "/ " ++ show (status tarefa)
+                           , "/ " ++ show (prioridade tarefa)
+                           , "/ " ++ show (categoria tarefa)
+                           , "/ " ++ maybe "Nothing" show (prazo tarefa)
+                           , "/ " ++ unwords (tags tarefa)
                            ]
 
 salvarEmArquivo :: FilePath -> [Tarefa] -> IO ()
@@ -20,9 +23,9 @@ salvarEmArquivo arquivo lista_tarefas = writeFile arquivo (unlines (map tarefaPa
 
 -- Daqui pra baixo nao ta funcionando eu acho, tenho q descobrir oq ta errado(provavelmente mta coisa)
 lerId :: String -> Maybe Int
-lerId id_string = case reads id_string of
-                  [(valor, "")] -> Just valor
-                  _          -> Nothing
+lerId id_string = if isDigit (head id_string)
+                     then Just (read id_string :: Int)
+                     else Nothing
 
 
 lerStatus :: String -> Maybe Status
@@ -74,20 +77,20 @@ lerDia dia_string = do
 
 stringParaTarefa :: String -> Maybe Tarefa
 stringParaTarefa tarefa = do
-                          let palavras = words tarefa
-                          if length palavras < 6
+                          let partes = separarString '/' tarefa
+                          if length partes < 2
                              then Nothing
                              else do
-                                  let id_tarefa : desc_tarefa : status_tarefa : prioridade_tarefa : categoria_tarefa : prazo_tarefa : tag_tarefa = palavras
-
+                                  let id_tarefa : desc_tarefa : status_tarefa : prioridade_tarefa : categoria_tarefa : prazo_tarefa : tag_tarefa = partes
+ 
                                   id <- lerId id_tarefa
                                   status <- lerStatus status_tarefa
                                   prioridade <- lerPrioridade prioridade_tarefa
                                   categoria <- lerCategoria categoria_tarefa
 
-                                  let prazo = if prazo_tarefa == "Nothing"
-                                              then Nothing
-                                              else lerDia prazo_tarefa
+                                  let prazo = if prazo_tarefa == " Nothing "
+                                                 then Nothing
+                                                 else lerDia prazo_tarefa
 
                                   return (Tarefa
                                           {idTarefa = id
