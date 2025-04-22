@@ -161,6 +161,11 @@ nuvemDeTags lista_tarefas =  zip (listaDeTagsExclusivas (listaDeTags lista_taref
   contagemDeTags [] = [] -- caso base
   contagemDeTags (x:xs) = [contagemTagsIguais x xs] ++ contagemDeTags (excluiTagsRepetidas x xs) -- gera uma lista de inteiros com a quantidade de vezes que cada tag aparece  
 
+-- funcao auxiliar para calcular quantas tarefas ha na lista
+qtdTarefas :: [Tarefa] -> Int
+qtdTarefas []     = 0
+qtdTarefas (_:xs) = 1 + qtdTarefas xs
+
 --funcao auxiliar para calcular a porcentagem de tarefas com determinado tipo
 porcentagemTarefa :: [Tarefa] -> Int -> Double
 porcentagemTarefa lista_tarefa qtdx = 100 * fromIntegral qtdx / fromIntegral (qtdTarefas lista_tarefa)
