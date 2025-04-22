@@ -2,11 +2,11 @@ module Tipos where
 
 import Data.Time.Calendar
 
-data Status = Pendente | Concluida deriving (Show, Eq)
+data Status = Pendente | Concluida deriving (Show, Eq, Read)
 
-data Prioridade = Baixa | Media | Alta deriving (Show, Eq, Ord)
+data Prioridade = Baixa | Media | Alta deriving (Show, Eq, Ord, Read)
 
-data Categoria = Trabalho | Estudos | Pessoal | Outro deriving (Show, Eq)
+data Categoria = Trabalho | Estudos | Pessoal | Outro deriving (Show, Eq, Read, Enum, Bounded)
 
 data Tarefa = Tarefa
     { idTarefa :: Int
