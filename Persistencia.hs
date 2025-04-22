@@ -4,6 +4,15 @@ import Tipos
 import System.IO
 import Data.List
 
+tarefaParaString :: Tarefa -> String
+tarefaParaString tarefa = unwords [ show (idTarefa tarefa)
+                           , descricao tarefa
+                           , show (status tarefa)
+                           , show (categoria tarefa)
+                           , maybe "Nothing" show (prazo tarefa)
+                           , unwords (tags tarefa)
+                           ]
+
 salvarEmArquivo :: FilePath -> [Tarefa] -> IO ()
 salvarEmArquivo arquivo lista_tarefas = writeFile arquivo (unlines (map tarefaParaString lista_tarefas))
 
