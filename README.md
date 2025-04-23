@@ -39,8 +39,7 @@ Sistema de gerenciamento de tarefas desenvolvido em Haskell como trabalho acadê
 - [Cabal](https://www.haskell.org/cabal/) (ou Stack)
 
 ## Clone o repositório
-git clone https://github.com/seu-usuario/Trabalho1-Haskell.git &&  
-cd Trabalho1-Haskell.git
+git clone https://github.com/seu-usuario/Trabalho1-Haskell.git &&  cd Trabalho1-Haskell
 
 ## Compilar o projeto
 ghc --make Main.hs -o gerenciador-tarefas
