@@ -15,7 +15,7 @@ Gabriel Valentin, Pablo Rodrigues, Pedro de Colla, Ruan Pablo
 - [X] testes
 - [ ] quickcheck
 - [X] modularizacao do codigo
-- [ ] readme organizado
+- [X] readme organizado
 
 *para as funcoes que podem retornar erro( como adcionar tarefas, vamo fazer uma funcao que compara se a entrada e igual o resultado e ela volta uma string para tela)
 
@@ -39,17 +39,14 @@ Sistema de gerenciamento de tarefas desenvolvido em Haskell como trabalho acadê
 - [Cabal](https://www.haskell.org/cabal/) (ou Stack)
 
 ## Clone o repositório
-git clone https://github.com/seu-usuario/gerenciador-tarefas-haskell.git 
-cd gerenciador-tarefas-haskell
+git clone https://github.com/seu-usuario/Trabalho1-Haskell.git 
+cd Trabalho1-Haskell.git
 
 ## Compilar o projeto
 ghc --make Main.hs -o gerenciador-tarefas
 
 ## Executar o programa
 ./gerenciador-tarefas
-
-## Executar testes com HUnit
-runhaskell TestesHUnit.hs
 
 ## Executar testes com QuickCheck
 nome arquivo do quick check
