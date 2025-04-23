@@ -9,10 +9,10 @@ Gabriel Valentin, Pablo Rodrigues, Pedro de Colla, Ruan Pablo
 - [X] gestao de prazos
 - [X] sistema de tags
 - [X] persistencia de dados
-- [ ] validacao
+- [X] validacao
 - [ ] interface simples via terminal
 - [X] relatorios
-- [ ] testes
+- [X] testes
 - [ ] quickcheck
 - [X] modularizacao do codigo
 - [ ] readme organizado
