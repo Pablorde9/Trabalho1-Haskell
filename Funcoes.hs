@@ -1,6 +1,7 @@
 module Funcoes where
 
 import Tipos
+import Data.Time (Day, parseTimeM, defaultTimeLocale)
 import Data.Time.Calendar
 import Data.Char (isDigit)
 
