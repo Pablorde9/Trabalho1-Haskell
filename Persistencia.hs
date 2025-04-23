@@ -22,34 +22,34 @@ salvarEmArquivo arquivo lista_tarefas = writeFile arquivo (unlines (map tarefaPa
 
 
 -- Daqui pra baixo nao ta funcionando eu acho, tenho q descobrir oq ta errado(provavelmente mta coisa)
-lerId :: String -> Maybe Int
+lerId :: String -> Int
 lerId id_string = if isDigit (head id_string)
-                     then Just (read id_string :: Int)
-                     else Nothing
+                     then (read id_string :: Int)
+                     else -1
 
 
-lerStatus :: String -> Maybe Status
+lerStatus :: String -> Status
 lerStatus status_string
- | status_string == "Pendente"  = Just Pendente
- | status_string == "Concluida" = Just Concluida
- | otherwise = Nothing
+ | status_string == " Pendente "  = Pendente
+ | status_string == " Concluida " = Concluida
+ | otherwise                      = error "Formatacao nao identificada"
 
 
-lerPrioridade :: String -> Maybe Prioridade
+lerPrioridade :: String -> Prioridade
 lerPrioridade prioridade_string
- | prioridade_string == "Baixa" = Just Baixa
- | prioridade_string == "Media" = Just Media
- | prioridade_string == "Alta"  = Just Alta
- | otherwise= Nothing
+ | prioridade_string == " Baixa " = Baixa
+ | prioridade_string == " Media " = Media
+ | prioridade_string == " Alta "  = Alta
+ | otherwise                      = error "Formatacao nao identificada"
 
 
-lerCategoria :: String -> Maybe Categoria
+lerCategoria :: String -> Categoria
 lerCategoria categoria_string
- | categoria_string == "Trabalho" = Just Trabalho
- | categoria_string == "Estudo"   = Just Estudos
- | categoria_string == "Pessoal"  = Just Pessoal
- | categoria_string == "Outro"    = Just Outro
- | otherwise                      = Nothing
+ | categoria_string == " Trabalho " = Trabalho
+ | categoria_string == " Estudos "   = Estudos
+ | categoria_string == " Pessoal "  = Pessoal
+ | categoria_string == " Outro "    = Outro
+ | otherwise                        = error "Formatacao nao identificada"
 
 
 separarString :: Char -> String -> [String]
@@ -58,49 +58,35 @@ separarString separador string = case break (== separador) string of
                                  (x, _:xs)   -> x : separarString separador xs
 
 lerDia :: String -> Maybe Day
-lerDia dia_string = do
-                    let partes = separarString ' ' dia_string
+lerDia dia_string = let partes = separarString '-' dia_string in
                     if length partes /= 3
                        then Nothing
-                       else do
-                            let [ano_string, mes_string, dia_string] = partes
-                            if not (all isDigit ano_string && all isDigit mes_string && all isDigit dia_string)
+                       else let [ano_string, mes_string, dia_string] = partes in
+                            if not (all isDigit (tail ano_string) && all isDigit mes_string && all isDigit (init dia_string))
                                then Nothing
-                               else do
-                                    let ano = read ano_string :: Integer
+                               else let ano = read ano_string :: Integer
                                         mes = read mes_string :: Int
-                                        dia = read dia_string :: Int
+                                        dia = read dia_string :: Int in
                                     if (mes < 1 || mes > 12 || dia < 1 || dia > 31)
                                        then Nothing
                                        else Just (fromGregorian ano mes dia)
 
 
-stringParaTarefa :: String -> Maybe Tarefa
-stringParaTarefa tarefa = do
-                          let partes = separarString '/' tarefa
-                          if length partes < 2
-                             then Nothing
-                             else do
-                                  let id_tarefa : desc_tarefa : status_tarefa : prioridade_tarefa : categoria_tarefa : prazo_tarefa : tag_tarefa = partes
- 
-                                  id <- lerId id_tarefa
-                                  status <- lerStatus status_tarefa
-                                  prioridade <- lerPrioridade prioridade_tarefa
-                                  categoria <- lerCategoria categoria_tarefa
-
-                                  let prazo = if prazo_tarefa == " Nothing "
-                                                 then Nothing
-                                                 else lerDia prazo_tarefa
-
-                                  return (Tarefa
-                                          {idTarefa = id
-                                          , descricao = desc_tarefa
-                                          , status = status
-                                          , prioridade = prioridade
-                                          , categoria = categoria
-                                          , prazo = prazo
-                                          , tags = tag_tarefa
-                                          })
+stringParaTarefa :: String -> Tarefa
+stringParaTarefa tarefa = let partes = separarString '/' tarefa in
+                          let id_tarefa : desc_tarefa : status_tarefa : prioridade_tarefa : categoria_tarefa : prazo_tarefa : tag_tarefa = partes in
+                          let prazo = if prazo_tarefa == " Nothing "
+                                         then Nothing
+                                         else lerDia prazo_tarefa
+                         in (Tarefa
+                            {idTarefa = lerId id_tarefa
+                            , descricao = init (tail desc_tarefa)
+                            , status = lerStatus status_tarefa
+                            , prioridade = lerPrioridade prioridade_tarefa
+                            , categoria = lerCategoria categoria_tarefa
+                            , prazo = prazo
+                            , tags = separarString ' ' (tail (head tag_tarefa))
+                            })
 
 
 
@@ -108,4 +94,4 @@ carregarDeArquivo :: FilePath -> IO [Tarefa]
 carregarDeArquivo arquivo = do
                             tarefas <- readFile arquivo
                             let linhas = lines tarefas
-                            return [tarefa | Just tarefa <- map stringParaTarefa linhas]
+                            return (map stringParaTarefa linhas)
