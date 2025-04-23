@@ -11,7 +11,7 @@ Gabriel Valentin, Pablo Rodrigues, Pedro de Colla, Ruan Pablo
 - [X] persistencia de dados
 - [ ] validacao
 - [ ] interface simples via terminal
-- [ ] relatorios
+- [X] relatorios
 - [ ] testes
 - [ ] quickcheck
 - [X] modularizacao do codigo
