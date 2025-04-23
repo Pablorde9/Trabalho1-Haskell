@@ -20,6 +20,12 @@ todosIds lista_tarefa = map idTarefa lista_tarefa
 idPertenceLista :: Tarefa -> [Tarefa] -> Bool
 idPertenceLista tarefa lista_tarefa = (elem (idTarefa tarefa) (todosIds lista_tarefa)) 
 
+validarAdicao :: Tarefa -> [Tarefa] -> IO ()
+validarAdicao tarefa lista_tarefa = do
+                if idPertenceLista tarefa lista_tarefa
+                   then putStrLn "Erro! esse id ja foi cadastrado por outra tarefa, lista inalterada."
+                   else putStrLn "Lista atualizada com sucesso!"
+
 -- adiciona elementos a lista
 adicionarTarefa :: Tarefa -> [Tarefa] -> [Tarefa]
 adicionarTarefa tarefa lista_tarefa = 
@@ -105,16 +111,16 @@ verificarAtrasos (t:ts) dataAtual
   | otherwise = verificarAtrasos ts dataAtual
 
 --faz o calculo dos dias restantes para todas as tarefas que tenham prazo
-calcularDiasRestantes :: Tarefa -> Data -> Maybe Int
-calcularDiasRestantes tarefa dataAtual =
-  case prazo tarefa of
-    Nothing -> Nothing --tarefa sem prazo definido
-    Just p -> Just (diferencaDias p dataAtual) --calcula dias restantes
+--calcularDiasRestantes :: Tarefa -> Data -> Maybe Int
+--calcularDiasRestantes tarefa dataAtual =
+--  case prazo tarefa of
+--    Nothing -> Nothing --tarefa sem prazo definido
+--    Just p -> Just (diferencaDias p dataAtual) --calcula dias restantes
 
 -- Função auxiliar para calcular diferença entre datas
-diferencaDias :: Data -> Data -> Int
-diferencaDias (Data a1 m1 d1) (Data a2 m2 d2) =
-  (a1 - a2) * 360 + (m1 - m2) * 30 + (d1 - d2) --aproximação de mês para 30 dias
+--diferencaDias :: Data -> Data -> Int
+--diferencaDias (Data a1 m1 d1) (Data a2 m2 d2) =
+--  (a1 - a2) * 360 + (m1 - m2) * 30 + (d1 - d2) --aproximação de mês para 30 dias
 
 
 
