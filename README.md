@@ -37,6 +37,7 @@ Sistema de gerenciamento de tarefas desenvolvido em Haskell como trabalho acadê
 ## Pré-requisitos
 - [GHC](https://www.haskell.org/ghc/) (versão 8.10 ou superior)
 - [Cabal](https://www.haskell.org/cabal/) (ou Stack)
+- Um arquivo nomeado como "arqteste.txt"
 
 ## Clone o repositório
 git clone https://github.com/seu-usuario/Trabalho1-Haskell.git &&  cd Trabalho1-Haskell
