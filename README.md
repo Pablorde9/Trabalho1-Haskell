@@ -8,7 +8,7 @@ Gabriel Valentin, Pablo Rodrigues, Pedro de Colla, Ruan Pablo
 - [X] funcoes avancadas
 - [X] gestao de prazos
 - [X] sistema de tags
-- [ ] persistencia de dados
+- [X] persistencia de dados
 - [ ] validacao
 - [ ] interface simples via terminal
 - [ ] relatorios
