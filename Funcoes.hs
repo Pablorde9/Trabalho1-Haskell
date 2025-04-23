@@ -118,10 +118,7 @@ calcularDiasRestantes :: Tarefa -> Day -> Maybe Int
 calcularDiasRestantes tarefa dataAtual =
   case prazo tarefa of
     Nothing -> Nothing
-    Just p -> Just (diffDays p dataAtual)
-
-
-
+    Just p -> Just (fromInteger (diffDays p dataAtual))
 
 -- Funcoes de Sistema de Tags:
 
