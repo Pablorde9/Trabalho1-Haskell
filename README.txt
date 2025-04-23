@@ -1,14 +1,10 @@
-# Primeiro Trabalho
-Gabriel Valentin, Pablo Rodrigues, Pedro de Colla, Ruan Pablo
+-> Primeiro Trabalho
+feito por: Gabriel Valentin, Pablo Rodrigues, Pedro de Colla, Ruan Pablo
 
-# Sistema de Gerenciamento de Tarefas em Haskell
-
-Link para instalção: (https://www.haskell.org/img/haskell-logo.svg)
-
-## Descrição
+-> Descrição
 Sistema de gerenciamento de tarefas desenvolvido em Haskell como trabalho acadêmico para a disciplina de Programação Funcional. Permite criar, modificar, organizar e consultar tarefas com categorias, prioridades e tags.
 
-## Funcionalidades
+-> Funcionalidades
 - ✅ Adicionar, remover e modificar tarefas
 - ✅ Filtrar por status (Pendente/Concluída), prioridade e categoria
 - ✅ Busca por palavras-chave e tags
@@ -16,19 +12,20 @@ Sistema de gerenciamento de tarefas desenvolvido em Haskell como trabalho acadê
 - ✅ Relatórios estatísticos
 - ✅ Persistência em arquivo
 
-## Pré-requisitos
+-> Pré-requisitos
 - [GHC](https://www.haskell.org/ghc/) (versão 8.10 ou superior)
 - [Cabal](https://www.haskell.org/cabal/) (ou Stack)
-- Um arquivo nomeado como "arqteste.txt"
+- Um arquivo nomeado como "arqteste.txt" (para as funções de teste de arquivo)
+- Um arquivo .txt para as funções de persistência de dados
 
-## Clone o repositório
+-> Clone o repositório
 git clone https://github.com/seu-usuario/Trabalho1-Haskell.git &&  cd Trabalho1-Haskell
 
-## Compilar o projeto
+-> Compilar o projeto
 ghc --make Main.hs -o gerenciador-tarefas
 
-## Executar o programa
+-> Executar o programa
 ./gerenciador-tarefas
 
-## Executar testes com QuickCheck
+-> Executar testes com QuickCheck
 nome arquivo do quick check
