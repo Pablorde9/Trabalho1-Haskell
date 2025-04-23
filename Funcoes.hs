@@ -182,25 +182,29 @@ porcentagemTarefa lista_tarefa qtdx = 100 * fromIntegral qtdx / fromIntegral (qt
 
 -- **ainda falta um pouco de testes - se printa bonitinho no main
 -- funcao que retorna um resumo das tarefas dentro da lista
-relatorioTarefa :: [Tarefa] -> String
-relatorioTarefa lista_tarefa =
-    let total = qtdTarefas lista_tarefa
-        pendente = length (filter ((==Pendente) . status) lista_tarefa)
-        concluida = length (filter ((==Concluida) . status) lista_tarefa)
-        qtdTrab = length (filter ((==Trabalho) . categoria) lista_tarefa)
-        qtdEst = length (filter ((==Estudos) . categoria) lista_tarefa)
-        qtdPes = length (filter ((==Pessoal) . categoria) lista_tarefa)
-        qtdOut = length (filter ((==Outro) . categoria) lista_tarefa)
-    in unlines -- unlines junta strings e adicionar o \n
-       [ "Relatorio Resumido:"
-       , "- Total de tarefas: " ++ show total
-       , "- Pendentes: " ++ show pendente ++ " | Concluidas: " ++ show concluida
-       , "- Distribuicao por categoria:"
-       , "* Trabalho: " ++ show qtdTrab ++ " tarefas (" ++ show (porcentagemTarefa lista_tarefa qtdTrab) ++ "%)"
-       , "* Estudos: " ++ show qtdEst ++ " tarefas (" ++ show (porcentagemTarefa lista_tarefa qtdEst) ++ "%)"
-       , "* Pessoal: " ++ show qtdPes ++ " tarefas (" ++ show (porcentagemTarefa lista_tarefa qtdPes) ++ "%)"
-       , "* Outro: " ++ show qtdOut ++ " tarefas (" ++ show (porcentagemTarefa lista_tarefa qtdOut) ++ "%)"
-       ]
+relatorioTarefa :: [Tarefa] -> IO ()
+relatorioTarefa lista_tarefa = do
+                               let total = qtdTarefas lista_tarefa
+                               let pendente = length (filter ((==Pendente) . status) lista_tarefa)
+                               let concluida = length (filter ((==Concluida) . status) lista_tarefa)
+                               let qtdTrab = length (filter ((==Trabalho) . categoria) lista_tarefa)
+                               let qtdEst = length (filter ((==Estudos) . categoria) lista_tarefa)
+                               let qtdPes = length (filter ((==Pessoal) . categoria) lista_tarefa)
+                               let qtdOut = length (filter ((==Outro) . categoria) lista_tarefa)
+                               putStrLn "Relatorio Resumido:"
+                               putStr ("- Total de tarefas: " ++ show total)
+                               putStrLn ""
+                               putStr ("- Pendentes: " ++ show pendente ++ " | Concluidas: " ++ show concluida)
+                               putStrLn ""
+                               putStrLn "- Distribuicao por categoria:"
+                               putStr ("* Trabalho: " ++ show qtdTrab ++ " tarefas (" ++ show (porcentagemTarefa lista_tarefa qtdTrab) ++ "%)")
+                               putStrLn ""
+                               putStr ("* Estudos: " ++ show qtdEst ++ " tarefas (" ++ show (porcentagemTarefa lista_tarefa qtdEst) ++ "%)")
+                               putStrLn ""
+                               putStr ("* Pessoal: " ++ show qtdPes ++ " tarefas (" ++ show (porcentagemTarefa lista_tarefa qtdPes) ++ "%)")
+                               putStrLn ""
+                               putStr ("* Outro: " ++ show qtdOut ++ " tarefas (" ++ show (porcentagemTarefa lista_tarefa qtdOut) ++ "%)")
+                               putStrLn ""
 
 --Funçoes do Display
 menu :: [Tarefa] -> IO ()
