@@ -15,7 +15,7 @@ Gabriel Valentin, Pablo Rodrigues, Pedro de Colla, Ruan Pablo
 - [X] testes
 - [ ] quickcheck
 - [X] modularizacao do codigo
-- [ ] readme organizado
+- [X] readme organizado
 
 *para as funcoes que podem retornar erro( como adcionar tarefas, vamo fazer uma funcao que compara se a entrada e igual o resultado e ela volta uma string para tela)
 
