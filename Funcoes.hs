@@ -192,4 +192,94 @@ relatorioTarefa lista_tarefa =
        , "* Outro: " ++ show qtdOut ++ " tarefas (" ++ show (porcentagemTarefa lista_tarefa qtdOut) ++ "%)"
        ]
 
+--Funçoes do Display
+menu :: [Tarefa] -> IO ()
+menu lista_tarefas = do
+                       putStrLn "Bem vindo ao Sistema de Gerenciamento de Tarefas!"
+                       putStrLn "Digite o que deseja fazer:"
+                       putStrLn "1. Modificar a Lista de Tarefas."
+                       putStrLn "2. Verificar alguma Informação na lista."
+                       putStrLn "3. Gestão de Prazos."
+                       putStrLn "4. Carregar Uma lista."
+                       putStrLn "5. Salvar."
+                       putStrLn "6. Sair."
+                       opcao <- readLn
+                       case opcao of
+                         1 -> do
+                                putStrLn "O que deseja fazer com a lista?"
+                                putStrLn "1. Adicionar tarefa."
+                                putStrLn "2. Remover tarefa."
+                                putStrLn "3. Marcar uma tarefa como concluída"
+                                opcao10 <- readLn
+                                case opcao10 of
+                                  1 -> do
+                                         novalista <- adicionarTarefaIO lista_tarefas
+                                         menu novalista
+                                  2 -> putStrLn "removerTarefa"
+                                  3 -> putStrLn "marcarCocluida"
+                         2 -> do
+                                putStrLn "O que deseja saber sobre a Lista?"
+                                putStrLn "1. Listar tarefas de uma categoria específica."
+                                putStrLn "2. Listar tarefas com uma prioridade específica"
+                                putStrLn "3. Listar tarefas cuja descrição contenha uma palavra-chave"
+                                putStrLn "4. Listar tarefas com um status específico."
+                                putStrLn "5. Ordernar por prioridade(da mais alta para mais baixa)."
+                                putStrLn "6. Listar tarefas que contenham uma tag específica."
+                                putStrLn "7. Listar as tags e suas frêquencias de uso."
+                                opcao20 <- readLn
+                                case opcao20 of
+                                  1 -> putStrLn "listarPorCategoria"
+                                  2 -> putStrLn "listarPorPrioridade"
+                                  3 -> putStrLn "buscarPorPalavraChave"
+                                  4 -> putStrLn "filtrarPorStatus"
+                                  5 -> putStrLn "ordenarPorPrioridade"
+                                  6 -> putStrLn "filtrarPorTag"
+                                  7 -> putStrLn "nuvemDeTags"
+                         3 -> do
+                                putStrLn "Ferramentas de gestão:"
+                                putStrLn "1. Verificar tarefas atrasadas."
+                                putStrLn "2. Tempo restante para realizar uma tarefa."
+                                opcao30 <- readLn
+                                case opcao30 of
+                                  1 -> putStrLn "verificarAtrasos"
+                                  2 -> putStrLn "calcularDiasRestantes"
+                         4 -> do
+                                putStrLn "salvarEmArquivo"
+                         5 -> do
+                                putStrLn "carregarDeArquivo"
+                         6 -> do
+                                putStrLn"Até mais!"
+
+                         _ -> do
+                                putStrLn "Opção Inválida!"
+
+-- Função auxiliar para converter String -> Maybe Day
+convertePrazo :: String -> Maybe Day
+convertePrazo "" = Nothing
+convertePrazo s = parseTimeM True defaultTimeLocale "%Y-%m-%d" s
+
+--Função AdicionarTarefa com saida em IO
+adicionarTarefaIO :: [Tarefa] -> IO [Tarefa]
+adicionarTarefaIO lista_tarefa = do
+                                   putStrLn "Digite a descrição da tarefa: "
+                                   descricao <- getLine
+                                   putStrLn "Digite o status(Pendente | Concluida): "
+                                   status_str <- getLine
+                                   let status = read status_str :: Status
+                                   putStrLn "Digite a prioridade(Baixa | Media | Alta): "
+                                   prioridade_str <- getLine
+                                   let prioridade = read prioridade_str :: Prioridade
+                                   putStrLn "Digite a categoria(Trabalho | Estudos | Pessoal | Outro): "
+                                   categoria_str <- getLine
+                                   let categoria = read categoria_str :: Categoria
+                                   putStrLn "Digite o prazo (formato: YYYY-MM-DD): "
+                                   prazo_str <- getLine
+                                   let prazo = convertePrazo prazo_str
+                                   putStrLn "Digite as tags separadas por espaço: "
+                                   tags_str <- getLine
+                                   let tags = words tags_str
+                                   let tarefa = Tarefa ((qtdTarefas lista_tarefa) + 1) descricao status prioridade categoria prazo tags
+                                   let novaLista = adicionarTarefa tarefa lista_tarefa
+                                   putStrLn "Tarefa adicionada com sucesso!"
+                                   return novaLista
 
