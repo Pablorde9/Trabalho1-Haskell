@@ -5,19 +5,19 @@ import Persistencia
 import Tipos
 import Data.Time.Calendar
 
-tarefa1 = Tarefa 1 "Estudar Haskell" Pendente Media Estudos (Just (fromGregorian 2025 04 11)) ["ufu", "haskell"]
+tarefa1 = Tarefa 1 "Estudar Haskell" Pendente Media Estudos (Just (fromGregorian 2025 05 11)) ["ufu", "haskell"]
 tarefa2 = Tarefa 2 "Fazer compras" Concluida Baixa Pessoal (Just (fromGregorian 2025 04 11)) ["casa"]
 tarefa3 = Tarefa 3 "Finalizar projeto" Pendente Alta Trabalho (Just (fromGregorian 2025 04 11)) ["dev", "haskell"]
-
+tarefa4 = Tarefa 4 "Ler Dom Casmurro" Pendente Baixa Pessoal Nothing ["leitura", "hobby", "Dom Casmurro"]
 
 lista1 = [ Tarefa 1 "Estudar Haskell" Pendente Media Estudos (Just (fromGregorian 2025 04 11)) ["ufu", "haskell"]
          , Tarefa 2 "Fazer compras" Concluida Baixa Pessoal (Just (fromGregorian 2025 04 11)) ["casa"]
          , Tarefa 3 "Finalizar projeto" Pendente Alta Trabalho (Just (fromGregorian 2025 04 11)) ["dev", "haskell"]
          ]
 
-lista2 = [ Tarefa 1 "Estudar Ingles" Pendente Media Estudos Nothing ["idiomas", "ingles", "hobby"]
-         , Tarefa 4 "Entregar Benchmark" Concluida Alta Trabalho (Just (fromGregorian 2025 04 21)) ["cuda", "benchmark", "dev"]
-         , Tarefa 2 "Ler Dom Casmurro" Pendente Baixa Pessoal Nothing ["leitura", "hobby", "Dom Casmurro"]
+lista2 = [ Tarefa 1 "Estudar Ingles" Pendente Media Estudos (Just (fromGregorian 2025 04 21)) ["idiomas", "ingles", "hobby"]
+         , Tarefa 2 "Entregar Benchmark" Concluida  Alta Trabalho (Just (fromGregorian 2025 04 21)) ["cuda", "benchmark", "dev"]
+         , Tarefa 3 "Ler Dom Casmurro" Pendente Baixa Pessoal (Just (fromGregorian 2025 05 02)) ["leitura", "hobby", "Dom Casmurro"]
          ]
 
 
@@ -94,6 +94,40 @@ testeFuncoesAvancadas = do
                         putStrLn "Ou podemos procurar por uma palavra chave especifica na descricao de alguma tarefa, como 'Haskell':"
                         let lista1_desc_haskell = buscarPorPalavraChave "Haskell" lista1
                         putStrLn (unlines (map show lista1_desc_haskell))
+
+
+maybeParaString :: Maybe Int -> String
+maybeParaString (Just n) = show n
+maybeParaString Nothing = "Nothing"
+
+
+testeFuncoesDeGestaoDePrazo ::Day -> IO ()
+testeFuncoesDeGestaoDePrazo dia_atual = do
+                                        putStrLn "Dada a lista: "
+                                        putStrLn (unlines (map show lista2))
+                                        putStrLn ""
+                                        putStrLn "Podemos checar quais tarefas estao atrasadas!"
+                                        let lista2_atrasada = verificarAtrasos lista2 dia_atual
+                                        putStrLn (unlines (map show lista2_atrasada))
+                                        putStrLn ""
+                                        putStrLn "Ou verificar os dias restantes de uma tarefa! Entao para a tarefa:"
+                                        print tarefa1
+                                        let tarefa1_tempo_restante = calcularDiasRestantes tarefa1 dia_atual
+                                        let tarefa1_string = maybeParaString tarefa1_tempo_restante
+                                        if tarefa1_string == "Nothing"
+                                           then putStr "Essa Tarefa nao tem prazo!"
+                                           else putStr ("Faltam: " ++ tarefa1_string ++ " dias")
+                                        putStrLn ""
+                                        putStrLn ""
+                                        putStrLn "Mas para a tarefa:"
+                                        print tarefa4
+                                        let tarefa4_tempo_restante = calcularDiasRestantes tarefa4 dia_atual
+                                        let tarefa4_string = maybeParaString tarefa4_tempo_restante
+                                        if tarefa4_string == "Nothing"
+                                           then putStr "Essa Tarefa nao tem prazo!"
+                                           else putStr ("Faltam: " ++ tarefa4_string ++ " dias")
+                                        putStrLn ""
+
 
 testeFuncoesDeTags :: IO ()
 testeFuncoesDeTags = do
