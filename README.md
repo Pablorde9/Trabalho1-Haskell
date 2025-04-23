@@ -42,3 +42,9 @@ Sistema de gerenciamento de tarefas desenvolvido em Haskell como trabalho acadê
 git clone https://github.com/seu-usuario/gerenciador-tarefas-haskell.git
 cd gerenciador-tarefas-haskell
 
+# Compilar o projeto
+ghc --make Main.hs -o gerenciador-tarefas
+
+# Executar o programa
+./gerenciador-tarefas
+
