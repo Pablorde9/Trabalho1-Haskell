@@ -48,3 +48,11 @@ ghc --make Main.hs -o gerenciador-tarefas
 # Executar o programa
 ./gerenciador-tarefas
 
+# Estrutura do projeto 
+.
+├── Main.hs            # Interface principal
+├── Funcoes.hs         # Lógica das operações
+├── Tipos.hs           # Definição de tipos
+├── Persistencia.hs    # Manipulação de arquivos
+├── README.md          # Este arquivo
+└── tarefas.txt        # Arquivo de dados (gerado automaticamente)
