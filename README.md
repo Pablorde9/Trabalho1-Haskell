@@ -39,7 +39,7 @@ Sistema de gerenciamento de tarefas desenvolvido em Haskell como trabalho acadê
 - [Cabal](https://www.haskell.org/cabal/) (ou Stack)
 
 ## Clone o repositório
-git clone https://github.com/seu-usuario/gerenciador-tarefas-haskell.git
+git clone https://github.com/seu-usuario/gerenciador-tarefas-haskell.git 
 cd gerenciador-tarefas-haskell
 
 # Compilar o projeto
@@ -48,11 +48,8 @@ ghc --make Main.hs -o gerenciador-tarefas
 # Executar o programa
 ./gerenciador-tarefas
 
-# Estrutura do projeto 
-.
-├── Main.hs            # Interface principal
-├── Funcoes.hs         # Lógica das operações
-├── Tipos.hs           # Definição de tipos
-├── Persistencia.hs    # Manipulação de arquivos
-├── README.md          # Este arquivo
-└── tarefas.txt        # Arquivo de dados (gerado automaticamente)
+# Executar testes com HUnit
+runhaskell TestesHUnit.hs
+
+# Executar testes com QuickCheck
+runhaskell TestesQuickCheck.hs
