@@ -5,22 +5,21 @@ import Persistencia
 import Tipos
 import Data.Time.Calendar
 
+-- tarefas pre definidas para uso das funcoes de testes
 tarefa1 = Tarefa 1 "Estudar Haskell" Pendente Media Estudos (Just (fromGregorian 2025 05 11)) ["ufu", "haskell"]
 tarefa2 = Tarefa 2 "Fazer compras" Concluida Baixa Pessoal (Just (fromGregorian 2025 04 11)) ["casa"]
 tarefa3 = Tarefa 3 "Finalizar projeto" Pendente Alta Trabalho (Just (fromGregorian 2025 04 11)) ["dev", "haskell"]
 tarefa4 = Tarefa 4 "Ler Dom Casmurro" Pendente Baixa Pessoal Nothing ["leitura", "hobby", "Dom Casmurro"]
 
-lista1 = [ Tarefa 1 "Estudar Haskell" Pendente Media Estudos (Just (fromGregorian 2025 04 11)) ["ufu", "haskell"]
-         , Tarefa 2 "Fazer compras" Concluida Baixa Pessoal (Just (fromGregorian 2025 04 11)) ["casa"]
-         , Tarefa 3 "Finalizar projeto" Pendente Alta Trabalho (Just (fromGregorian 2025 04 11)) ["dev", "haskell"]
-         ]
+-- listas pre definidas para uso das funcoes de testes
+lista1 = [tarefa3, tarefa2, tarefa1]
 
 lista2 = [ Tarefa 1 "Estudar Ingles" Pendente Media Estudos (Just (fromGregorian 2025 04 21)) ["idiomas", "ingles", "hobby"]
          , Tarefa 2 "Entregar Benchmark" Concluida  Alta Trabalho (Just (fromGregorian 2025 04 21)) ["cuda", "benchmark", "dev"]
          , Tarefa 3 "Ler Dom Casmurro" Pendente Baixa Pessoal (Just (fromGregorian 2025 05 02)) ["leitura", "hobby", "Dom Casmurro"]
          ]
 
-
+-- funcao que aplica as funcoes basicas implementadas as tarefas(tarefa1, tarefa2, tarefa3) pre definidas
 testeFuncoesBasicas :: IO ()
 testeFuncoesBasicas = do
                       putStrLn "A partir da tarefa:"
@@ -69,6 +68,7 @@ testeFuncoesBasicas = do
                       putStrLn (unlines (map show lista_elem_repetido))
 
 
+-- funcao que aplica as funcoes avancadas implementadas a lista(lista1) pre definida
 testeFuncoesAvancadas :: IO ()
 testeFuncoesAvancadas = do
                         putStrLn "Dada a lista:"
@@ -95,12 +95,12 @@ testeFuncoesAvancadas = do
                         let lista1_desc_haskell = buscarPorPalavraChave "Haskell" lista1
                         putStrLn (unlines (map show lista1_desc_haskell))
 
-
+-- funcao auxiliar para converte o tipo maybe Int para string, para o teste de gestao de prazo
 maybeParaString :: Maybe Int -> String
-maybeParaString (Just n) = show n
-maybeParaString Nothing = "Nothing"
+maybeParaString (Just n) = show n -- se for um numero, mostra string com o numero
+maybeParaString Nothing = "Nothing" -- senao, string com "Nothing"
 
-
+-- funcao que aplica as funcoes de gestao de prazo implementadas a lista(lista2) e tarefa(tarefa4) pre definidas
 testeFuncoesDeGestaoDePrazo ::Day -> IO ()
 testeFuncoesDeGestaoDePrazo dia_atual = do
                                         putStrLn "Dada a lista: "
@@ -128,7 +128,7 @@ testeFuncoesDeGestaoDePrazo dia_atual = do
                                            else putStr ("Faltam: " ++ tarefa4_string ++ " dias")
                                         putStrLn ""
 
-
+-- funcao que aplica as funcoes de tags implementadas a lista(lista2) pre definida
 testeFuncoesDeTags :: IO ()
 testeFuncoesDeTags = do
                      putStrLn "Dada a lista:"
@@ -142,6 +142,8 @@ testeFuncoesDeTags = do
                      let lista2_frequencia_tags = nuvemDeTags lista2
                      putStrLn (unlines (map show lista2_frequencia_tags))
 
+
+-- funcao que aplica as funcoes de persistencia de dados implementadas a lista(lista1) pre definida
 testeFuncoesDePersistenciaDeDados :: IO ()
 testeFuncoesDePersistenciaDeDados = do
                            putStrLn "Para que os dados nao sejam perdidos quando encerrarmos o programa, podemos guardar nossa lista em um arquivo!"
@@ -157,6 +159,8 @@ testeFuncoesDePersistenciaDeDados = do
                            tarefas_carregadas <- carregarDeArquivo "arqteste.txt"
                            putStrLn (unlines (map show tarefas_carregadas))
 
+
+-- funcao que aplica a funcao de relatorio implementada a lista(lista2) pre definida
 testeRelatorio :: IO ()
 testeRelatorio  = do
                   putStrLn "Geraremos um pequeno relatorio da lista:"
