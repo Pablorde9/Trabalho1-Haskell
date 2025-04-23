@@ -51,5 +51,5 @@ ghc --make Main.hs -o gerenciador-tarefas
 ## Executar testes com HUnit
 runhaskell TestesHUnit.hs
 
-# Executar testes com QuickCheck
-runhaskell TestesQuickCheck.hs
+## Executar testes com QuickCheck
+nome arquivo do quick check
