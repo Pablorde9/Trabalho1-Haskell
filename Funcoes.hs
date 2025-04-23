@@ -215,9 +215,10 @@ menu lista_tarefas = do
                        putStrLn "2. Verificar alguma Informação na lista."
                        putStrLn "3. Mostrar Lista"
                        putStrLn "4. Gestão de Prazos."
-                       putStrLn "5. Carregar Uma lista."
-                       putStrLn "6. Salvar."
-                       putStrLn "7. Sair."
+                       putStrLn "5. Relatorio"
+                       putStrLn "6. Carregar Uma lista."
+                       putStrLn "7. Salvar."
+                       putStrLn "8. Sair."
                        opcao <- readLn
                        case opcao of
                          1 -> do
@@ -304,20 +305,22 @@ menu lista_tarefas = do
                                   2 -> do
                                          putStrLn "calcularDiasRestantes"
                                          menu lista_tarefas
-
                          5 -> do
+                                relatorioTarefa lista_tarefas
+                                menu lista_tarefas
+                         6 -> do
                                 putStrLn "Digite onde você deseja salvar o arquivo: "
                                 arquivo_Str <- getLine
                                 salvarEmArquivo arquivo_Str lista_tarefas
                                 putStrLn "Lista salva com sucesso!"
                                 menu lista_tarefas
-                         6 -> do
+                         7 -> do
                                 putStrLn "Digite onde o caminho do arquivo que você deseja carregar: "
                                 arquivo_Str <- getLine
                                 lista <- carregarDeArquivo arquivo_Str
                                 let novalista = lista
                                 menu novalista
-                         7 -> do
+                         8 -> do
                                 putStrLn"Até mais!"
 
                          _ -> do
