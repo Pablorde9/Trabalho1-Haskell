@@ -20,11 +20,13 @@ todosIds lista_tarefa = map idTarefa lista_tarefa
 idPertenceLista :: Tarefa -> [Tarefa] -> Bool
 idPertenceLista tarefa lista_tarefa = (elem (idTarefa tarefa) (todosIds lista_tarefa)) 
 
+
+-- Imprime uma mensagem dizendo se a adicao de Tarefa na lista foi bem sucedida ou nao
 validarAdicao :: Tarefa -> [Tarefa] -> IO ()
 validarAdicao tarefa lista_tarefa = do
-                if idPertenceLista tarefa lista_tarefa
-                   then putStrLn "Erro! esse id ja foi cadastrado por outra tarefa, lista inalterada."
-                   else putStrLn "Lista atualizada com sucesso!"
+                if idPertenceLista tarefa lista_tarefa -- checa se ja existe um id na lista igual ao da tarefa tentando ser adicionada
+                   then putStrLn "Erro! esse id ja foi cadastrado por outra tarefa, lista inalterada." -- caso sim
+                   else putStrLn "Lista atualizada com sucesso!" -- caso nao
 
 -- adiciona elementos a lista
 adicionarTarefa :: Tarefa -> [Tarefa] -> [Tarefa]
