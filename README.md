@@ -18,3 +18,27 @@ Gabriel Valentin, Pablo Rodrigues, Pedro de Colla, Ruan Pablo
 - [ ] readme organizado
 
 *para as funcoes que podem retornar erro( como adcionar tarefas, vamo fazer uma funcao que compara se a entrada e igual o resultado e ela volta uma string para tela)
+
+# Sistema de Gerenciamento de Tarefas em Haskell
+
+Link para instalção: (https://www.haskell.org/img/haskell-logo.svg)
+
+## Descrição
+Sistema de gerenciamento de tarefas desenvolvido em Haskell como trabalho acadêmico para a disciplina de Programação Funcional. Permite criar, modificar, organizar e consultar tarefas com categorias, prioridades e tags.
+
+## Funcionalidades
+- ✅ Adicionar, remover e modificar tarefas
+- ✅ Filtrar por status (Pendente/Concluída), prioridade e categoria
+- ✅ Busca por palavras-chave e tags
+- ✅ Gestão de prazos (dias restantes, tarefas atrasadas)
+- ✅ Relatórios estatísticos
+- ✅ Persistência em arquivo
+
+## Pré-requisitos
+- [GHC](https://www.haskell.org/ghc/) (versão 8.10 ou superior)
+- [Cabal](https://www.haskell.org/cabal/) (ou Stack)
+
+## Clone o repositório
+git clone https://github.com/seu-usuario/gerenciador-tarefas-haskell.git
+cd gerenciador-tarefas-haskell
+
