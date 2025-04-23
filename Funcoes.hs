@@ -2,6 +2,7 @@ module Funcoes where
 
 import Tipos
 import Persistencia
+import Testes
 import Data.Time (Day, parseTimeM, defaultTimeLocale)
 import Data.Time.Calendar
 import Data.Char (isDigit)
