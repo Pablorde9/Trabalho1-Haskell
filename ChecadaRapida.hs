@@ -131,5 +131,6 @@ checadaRapida = do
   teste <- $quickCheckAll
   if teste then putStrLn "Parabens! Todos os testes deram certo."
            else putStrLn "Poxa! Alguns testes falharam."
-main :: IO ()
-main = checadaRapida
+           
+iniciaChecadaRapida :: IO ()
+iniciaChecadaRapida = checadaRapida
