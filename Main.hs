@@ -8,7 +8,7 @@ import ChecadaRapida
 import System.IO
 import Data.Time.Calendar (Day, fromGregorian)
 import Data.Time.Clock (getCurrentTime, utctDay)
-import Data.Time (Day, parseTimeM, defaultTimeLocale)
+import Data.Time (Day, parseTimeM, defaultTimeLocale, getCurrentTime, utctDay)
 import System.Directory (doesFileExist)
 import Control.Monad (when)
 import Text.Read (readMaybe)
@@ -26,7 +26,9 @@ menu lista_tarefas = do
                        putStrLn "5. Relatorio"
                        putStrLn "6. Carregar Uma lista."
                        putStrLn "7. Salvar."
-                       putStrLn "8. Sair."
+                       putStrLn "8. Testes"
+                       putStrLn "9. QuickCheck."
+                       putStrLn "10. Sair."
                        opcao <- readLn
                        case opcao of
                          1 -> do
@@ -61,57 +63,80 @@ menu lista_tarefas = do
                                          categoria_Str <- getLine
                                          let categoria = read categoria_Str :: Categoria
                                          let novaLista = listarPorCategoria categoria lista_tarefas
-                                         print novaLista
+                                         putStrLn (unlines (map show novaLista))
                                          menu lista_tarefas
                                   2 -> do
                                          putStrLn "Digite a prioridade que será listada: "
                                          prioridade_Str <- getLine
                                          let prioridade = read prioridade_Str :: Prioridade
                                          let novaLista = listarPorPrioridade prioridade lista_tarefas
-                                         print novaLista
+                                         putStrLn (unlines (map show novaLista))
                                          menu lista_tarefas
                                   3 -> do
                                          putStrLn "Digite a palavra-chave que será listada: "
                                          palavra_Str <- getLine
                                          let novaLista = buscarPorPalavraChave palavra_Str lista_tarefas
-                                         print novaLista
+                                         putStrLn (unlines (map show novaLista))
                                          menu lista_tarefas
                                   4 -> do
                                          putStrLn "Digite a status que será listado: "
                                          status_Str <- getLine
                                          let status = read status_Str :: Status
                                          let novaLista = filtrarPorStatus status lista_tarefas
-                                         print novaLista
+                                         putStrLn (unlines (map show novaLista))
                                          menu lista_tarefas
                                   5 -> do
                                          let novaLista = ordenarPorPrioridade lista_tarefas
-                                         print novaLista
+                                         putStrLn (unlines (map show novaLista))
                                          menu lista_tarefas
                                   6 -> do
                                          putStrLn "Digite a tag que será listada: "
                                          tag_Str <- getLine
                                          let novaLista = filtrarPorTag tag_Str lista_tarefas
-                                         print novaLista
+                                         putStrLn (unlines (map show novaLista))
                                          menu lista_tarefas
                                   7 -> do
                                          let novaLista = nuvemDeTags lista_tarefas
-                                         print novaLista
+                                         putStrLn (unlines (map show novaLista))
                                          menu lista_tarefas
                          3 -> do
-                                mostrarLista lista_tarefas
+                                putStrLn (unlines (map show lista_tarefas))
                                 menu lista_tarefas
                          4 -> do
                                 putStrLn "Ferramentas de gestão:"
                                 putStrLn "1. Verificar tarefas atrasadas."
-                                putStrLn "2. Tempo restante para realizar uma tarefa."
+                                putStrLn "2. Tempo restante para realizar uma tarefas."
                                 opcao30 <- readLn
                                 case opcao30 of
                                   1 -> do
-                                         --let novaLista = verificarAtrasos lista_tarefas
-                                        -- print novaLista
+                                         dia <- pegarDiaAtual
+                                         let novaLista = verificarAtrasos lista_tarefas dia
+                                         putStrLn (unlines (map show novaLista))
                                          menu lista_tarefas
                                   2 -> do
-                                         putStrLn "calcularDiasRestantes"
+                                         putStrLn "Digite o id da tarefa: "
+                                         id <- readLn
+                                         putStrLn "Digite a descrição da tarefa: "
+                                         descricao <- getLine
+                                         putStrLn "Digite o status(Pendente | Concluida): "
+                                         status_str <- getLine
+                                         let status = read status_str :: Status
+                                         putStrLn "Digite a prioridade(Baixa | Media | Alta): "
+                                         prioridade_str <- getLine
+                                         let prioridade = read prioridade_str :: Prioridade
+                                         putStrLn "Digite a categoria(Trabalho | Estudos | Pessoal | Outro): "
+                                         categoria_str <- getLine
+                                         let categoria = read categoria_str :: Categoria
+                                         putStrLn "Digite o prazo (formato: YYYY-MM-DD): "
+                                         prazo_str <- getLine
+                                         let prazo = convertePrazo prazo_str
+                                         putStrLn "Digite as tags separadas por espaço: "
+                                         tags_str <- getLine
+                                         let tags = words tags_str
+                                         let tarefa = Tarefa id descricao status prioridade categoria prazo tags
+                                         dia <- pegarDiaAtual
+                                         let tempo = calcularDiasRestantes tarefa dia
+                                         putStrLn (show tempo)
                                          menu lista_tarefas
                          5 -> do
                                 relatorioTarefa lista_tarefas
@@ -129,6 +154,26 @@ menu lista_tarefas = do
                                 let novalista = lista
                                 menu novalista
                          8 -> do
+                                putStrLn "O que deseja testar: "
+                                putStrLn "1. Funções basicas."
+                                putStrLn "2. Funções avançadas."
+                                putStrLn "3. Funções de gestão de prazo."
+                                putStrLn "4. Funções de Tags."
+                                putStrLn "5. Funções de Persistencia de dados."
+                                putStrLn "6. Relatorio."
+                                opcao80 <- readLn
+                                case opcao80 of
+                                  1 -> testeFuncoesBasicas
+                                  2 -> testeFuncoesAvancadas
+                                  3 -> do
+                                         prazo <- pegarDiaAtual
+                                         testeFuncoesDeGestaoDePrazo prazo
+                                  4 -> testeFuncoesDeTags
+                                  5 -> testeFuncoesDePersistenciaDeDados
+                                  6 -> testeRelatorio
+                         9 -> do
+                                iniciaChecadaRapida
+                         10 -> do
                                 putStrLn"Até mais!"
 
                          _ -> do
@@ -138,6 +183,13 @@ menu lista_tarefas = do
 convertePrazo :: String -> Maybe Day
 convertePrazo "" = Nothing -- se a string for vazia não tem o que converter
 convertePrazo s = parseTimeM True defaultTimeLocale "%Y-%m-%d" s -- faz a conversão para o tipo day
+
+--Função auxiliar para pegar a data atual como o tipo day
+pegarDiaAtual :: IO Day
+pegarDiaAtual = do
+                  agora <- getCurrentTime
+                  let dia = utctDay agora
+                  return dia
 
 --Função AdicionarTarefa com saida em IO
 adicionarTarefaIO :: [Tarefa] -> IO [Tarefa]
@@ -193,7 +245,5 @@ marcarConcluidaIO lista_tarefas = do
                                    return novaLista
 
 
-
-main :: IO ()
 main = do 
          menu []
