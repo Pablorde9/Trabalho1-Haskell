@@ -4,8 +4,6 @@ module Main where
 import Test.QuickCheck
 import Test.QuickCheck.All
 import Data.Time.Calendar (Day, fromGregorian, diffDays)
-import Data.List (sortOn)
-import Data.Ord (Down(..))
 
 import Tipos
 import Funcoes
