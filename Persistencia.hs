@@ -27,7 +27,7 @@ salvarEmArquivo arquivo lista_tarefas = writeFile arquivo (unlines (map tarefaPa
 
 -- le um string e retorna um int
 lerId :: String -> Int
-lerId id_string = if isDigit (head id_string) -- checa se o primeiro caractere da string e um numero
+lerId id_string = if isDigit (init id_string) -- checa se o primeiro caractere da string e um numero
                      then (read id_string :: Int) -- se sim, converte para int
                      else error "Formatacao nao identificada" -- se nao, retorna erro
 
