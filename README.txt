@@ -15,11 +15,23 @@ Sistema de gerenciamento de tarefas desenvolvido em Haskell como trabalho acadê
 -> Pré-requisitos
 - [GHC](https://www.haskell.org/ghc/) (versão 8.10 ou superior)
 - [Cabal](https://www.haskell.org/cabal/) (ou Stack)
+- QuickCheck (versão 2.15.0.1)
+- time (versão 1.14)
+- directory (versão 1.3.9)
 - Um arquivo nomeado como "arqteste.txt" (para as funções de teste de arquivo)
 - Um arquivo .txt para as funções de persistência de dados
 
 -> Clone o repositório
-git clone https://github.com/seu-usuario/Trabalho1-Haskell.git &&  cd Trabalho1-Haskell
+git clone https://github.com/seu-usuario/Trabalho1-Haskell.git && cd Trabalho1-Haskell
+
+-> Instale a lib QuickCheck
+cabal install --lib QuickCheck
+
+-> Instale a lib time
+cabal install --lib time
+
+-> Instale a lib directory
+cabal install --lib directory
 
 -> Compilar o projeto
 ghc --make Main.hs -o gerenciador-tarefas
