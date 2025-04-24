@@ -1,5 +1,5 @@
 {-# LANGUAGE TemplateHaskell #-}
-module Main where
+module ChecadaRapida where
 
 import Test.QuickCheck
 import Test.QuickCheck.All
