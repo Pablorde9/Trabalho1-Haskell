@@ -11,6 +11,8 @@ Sistema de gerenciamento de tarefas desenvolvido em Haskell como trabalho acadê
 - ✅ Gestão de prazos (dias restantes, tarefas atrasadas)
 - ✅ Relatórios estatísticos
 - ✅ Persistência em arquivo
+- ✅ Testes pré-definidos para mostrar as funcionalidades do programa
+- ✅ Testes automatizados com a lib QuickCheck 
 
 -> Pré-requisitos
 - [GHC](https://www.haskell.org/ghc/) (versão 8.10 ou superior)
