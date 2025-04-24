@@ -4,6 +4,7 @@ import Tipos
 import Funcoes
 import Persistencia
 import Testes
+import ChecadaRapida
 import System.IO
 import Data.Time.Calendar (Day, fromGregorian)
 import Data.Time.Clock (getCurrentTime, utctDay)
