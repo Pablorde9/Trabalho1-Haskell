@@ -28,4 +28,4 @@ ghc --make Main.hs -o gerenciador-tarefas
 ./gerenciador-tarefas
 
 -> Executar testes com QuickCheck
-nome arquivo do quick check
+Pode ser usado pela oção via menu no programa compilado. Código fonte esta no arquivo "ChecadaRapida.hs"
