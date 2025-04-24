@@ -4,23 +4,23 @@ feito por: Gabriel Valentin, Pablo Rodrigues, Pedro de Colla, Ruan Pablo
 -> Descrição
 Sistema de gerenciamento de tarefas desenvolvido em Haskell como trabalho acadêmico para a disciplina de Programação Funcional. Permite criar, modificar, organizar e consultar tarefas com categorias, prioridades e tags.
 
-## Funcionalidades Principais
-### Gerenciamento Básico
+-> Funcionalidades Principais
+Gerenciamento Básico
 - ✅ Adicionar, remover e modificar tarefas
 - ✅ Marcar tarefas como concluídas
 - ✅ Validação de IDs únicos
 
-### Filtros e Organização
+Filtros e Organização
 - 🔍 Filtrar por status (Pendente/Concluída), prioridade e categoria
 - 🔎 Busca por palavras-chave na descrição
 - 🏷️ Filtro por tags e visualização de nuvem de tags
 - 📅 Ordenação por prioridade (da mais alta para a mais baixa)
 
-### Gestão de Prazos
+Gestão de Prazos
 - ⏰ Verificação de tarefas atrasadas
 - 📆 Cálculo de dias restantes para conclusão
 
-### Relatórios e Persistência
+Relatórios e Persistência
 - 📊 Relatórios estatísticos com distribuição por categoria
 - 💾 Salvar e carregar tarefas de/para arquivos
 
